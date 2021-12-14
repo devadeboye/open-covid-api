@@ -35,3 +35,4 @@ lerna-debug.log*
 
 # other files
 .env
+push.sh
