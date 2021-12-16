@@ -8,4 +8,5 @@ export const envValidationSchema = Joi.object({
     .required(),
   CONNECTION_STRING: Joi.string().trim().required(),
   PORT: Joi.number().default(4005),
+  DATA_SOURCE: Joi.string().trim().required(),
 });

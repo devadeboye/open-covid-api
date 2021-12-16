@@ -3,4 +3,5 @@ export const envConfiguration = {
   PORT: 'PORT',
   NODE_ENV: 'NODE_ENV',
   CONNECTION_STRING: 'CONNECTION_STRING',
+  DATA_SOURCE: 'DATA_SOURCE',
 };

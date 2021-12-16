@@ -6,11 +6,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { envConfiguration } from './utils/config/env.configuration';
 import { envValidationSchema } from './utils/config/env.validation';
+import { ScheduleModule } from '@nestjs/schedule';
+import { CronModule } from './cron/cron.module';
 
 @Global()
 @Module({
   imports: [
     CovidModule,
+    ScheduleModule.forRoot(),
+    CronModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({

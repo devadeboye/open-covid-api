@@ -7,7 +7,7 @@ import { State, StateSchema } from './models/state.model';
 import { CountryService } from './services/country.service';
 import { StateService } from './services/state.service';
 
-// @Global()
+@Global()
 @Module({
   controllers: [CountryController, StateController],
   providers: [CountryService, StateService],

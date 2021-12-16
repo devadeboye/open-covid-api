@@ -7,7 +7,7 @@ import { StateEnum } from 'src/utils/enums/state.enum';
 @Schema(mongooseSchemaConfig)
 export class State extends mongoose.Document {
   @Prop({ enum: Object.values(StateEnum) })
-  name: StateEnum;
+  state: StateEnum;
 
   @Prop({ enum: Object.values(CountryEnum) })
   country: CountryEnum;

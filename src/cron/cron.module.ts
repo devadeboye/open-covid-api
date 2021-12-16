@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CronController } from './controllers/cron.controller';
 import { CronService } from './services/cron.service';
 
-// @Global()
+@Global()
 @Module({
   controllers: [CronController],
   providers: [CronService],
