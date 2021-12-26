@@ -23,18 +23,19 @@ export class StateService {
     });
   }
 
-  async getStatisticsByState(state: StateEnum) {
-    const result = await this.stateModel
-      .findOne({ state })
-      .select(['-createdAt', '-_id']);
+  async getStatisticsByState(country: CountryEnum, state: StateEnum) {
+    const result = await this.stateModel.findOne({ country, state });
     if (!result) {
       throw new NotFoundException('covid 19 information for state not found');
     }
     return result;
   }
 
-  async stateWithHighestMortality() {
-    const highest = await this.stateModel.find().sort({ death: -1 }).limit(1);
+  async stateWithHighestMortality(country: CountryEnum) {
+    const highest = await this.stateModel
+      .find({ country })
+      .sort({ death: -1 })
+      .limit(1);
     if (!highest) {
       throw new NotFoundException(
         'covid 19 information for hightest mortality not found',
@@ -43,9 +44,9 @@ export class StateService {
     return highest;
   }
 
-  async stateWithLowestMortality() {
+  async stateWithLowestMortality(country: CountryEnum) {
     const lowest = await this.stateModel
-      .find()
+      .find({ country })
       .sort({ death: +1 })
       .limit(1);
     if (!lowest) {
@@ -56,9 +57,9 @@ export class StateService {
     return lowest;
   }
 
-  async stateWithHighestActiveCases() {
+  async stateWithHighestActiveCases(country: CountryEnum) {
     const highest = await this.stateModel
-      .find()
+      .find({ country })
       .sort({ casesOnAdmission: -1 })
       .limit(1);
     if (!highest) {
@@ -69,9 +70,9 @@ export class StateService {
     return highest;
   }
 
-  async stateWithHighestConfirmedCases() {
+  async stateWithHighestConfirmedCases(country: CountryEnum) {
     const highest = await this.stateModel
-      .find()
+      .find({ country })
       .sort({ confirmedCases: -1 })
       .limit(1);
     if (!highest) {

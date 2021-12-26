@@ -1,5 +1,5 @@
 export const mongooseSchemaConfig = {
-  id: true,
+  id: false,
   versionKey: false,
   timestamps: true,
   autoIndex: true,
@@ -8,6 +8,7 @@ export const mongooseSchemaConfig = {
     transform: (_, ret) => {
       delete ret._id;
       delete ret.updatedAt;
+      delete ret.createdAt;
       return ret;
     },
   },
@@ -16,6 +17,7 @@ export const mongooseSchemaConfig = {
     transform: (_, ret) => {
       delete ret._id;
       delete ret.updatedAt;
+      delete ret.createdAt;
       return ret;
     },
   },

@@ -8,28 +8,31 @@ import { StateService } from '../services/state.service';
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
-  @Get('state/:name')
-  getStatisticsByState(@Param('name') name: StateEnum) {
-    return this.stateService.getStatisticsByState(name);
+  @Get(':country/state/:name')
+  getStatisticsByState(
+    @Param('country') country: CountryEnum,
+    @Param('name') name: StateEnum,
+  ) {
+    return this.stateService.getStatisticsByState(country, name);
   }
 
-  @Get('state/mortality/highest')
-  stateWithHighestMortality() {
-    return this.stateService.stateWithHighestMortality();
+  @Get(':country/state/mortality/highest')
+  stateWithHighestMortality(@Param('country') country: CountryEnum) {
+    return this.stateService.stateWithHighestMortality(country);
   }
 
-  @Get('state/mortality/lowest')
-  stateWithLowestMortality() {
-    return this.stateService.stateWithLowestMortality();
+  @Get(':country/state/mortality/lowest')
+  stateWithLowestMortality(@Param('country') country: CountryEnum) {
+    return this.stateService.stateWithLowestMortality(country);
   }
 
-  @Get('state/active-case/highest')
-  stateWithHighestActiveCases() {
-    return this.stateService.stateWithHighestActiveCases();
+  @Get(':country/state/active-case/highest')
+  stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
+    return this.stateService.stateWithHighestActiveCases(country);
   }
 
-  @Get('state/confirmed-case/highest')
-  stateWithHighestConfirmedCases() {
-    return this.stateService.stateWithHighestConfirmedCases();
+  @Get(':country/state/confirmed-case/highest')
+  stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
+    return this.stateService.stateWithHighestConfirmedCases(country);
   }
 }
