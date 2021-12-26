@@ -30,13 +30,14 @@ export class CronService {
   }
 
   // @Cron(CronExpression.EVERY_8_HOURS)
-  @Cron(CronExpression.EVERY_5_MINUTES)
+  @Cron(CronExpression.EVERY_4_HOURS)
   async updateStoredData() {
     const result = await this.getDataFromSource();
     const { states, ...nationalStatistics } = result.data;
     const nigerianStatistics = nationalStatistics as unknown as CountryDto;
     nigerianStatistics.name = CountryEnum.Nigeria;
     const stateStatistics = states.map((state) => {
+      delete state?._id;
       state['country'] = CountryEnum.Nigeria;
       return state as unknown as StateDto;
     });

@@ -13,17 +13,22 @@ export class StateController {
     return this.stateService.getStatisticsByState(name);
   }
 
-  @Get('state/highest-mortality')
+  @Get('state/mortality/highest')
   stateWithHighestMortality() {
     return this.stateService.stateWithHighestMortality();
   }
 
-  @Get('state/highest-active-case')
+  @Get('state/mortality/lowest')
+  stateWithLowestMortality() {
+    return this.stateService.stateWithLowestMortality();
+  }
+
+  @Get('state/active-case/highest')
   stateWithHighestActiveCases() {
     return this.stateService.stateWithHighestActiveCases();
   }
 
-  @Get('state/highest-confirmed-case')
+  @Get('state/confirmed-case/highest')
   stateWithHighestConfirmedCases() {
     return this.stateService.stateWithHighestConfirmedCases();
   }
