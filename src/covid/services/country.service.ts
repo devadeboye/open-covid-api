@@ -12,8 +12,10 @@ export class CountryService {
     @InjectModel(Country.name) private readonly countryModel: Model<Country>,
   ) {}
 
-  getSummaryByCountry(name: CountryEnum) {
-    //
+  async getSummaryByCountry(name: CountryEnum) {
+    return await this.countryModel
+      .findOne({ name })
+      .select(['-createdAt', '-_id']);
   }
 
   updateInformation(update: CountryDto) {
