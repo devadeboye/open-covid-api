@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { CountryEnum } from 'src/utils/enums/country.enum';
 import { StateEnum } from 'src/utils/enums/state.enum';
+import { GetStatisticsByStateGuard } from '../guards/state.guard';
 import { CountryService } from '../services/country.service';
 import { StateService } from '../services/state.service';
 
@@ -9,6 +10,7 @@ export class StateController {
   constructor(private readonly stateService: StateService) {}
 
   @Get(':country/state/:name')
+  @UseGuards(GetStatisticsByStateGuard)
   getStatisticsByState(
     @Param('country') country: CountryEnum,
     @Param('name') name: StateEnum,
