@@ -1,38 +1,76 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Version,
+} from '@nestjs/common';
 import { CountryEnum } from 'src/utils/enums/country.enum';
 import { StateEnum } from 'src/utils/enums/state.enum';
-import { CountryService } from '../services/country.service';
 import { StateService } from '../services/state.service';
+import { countryNameValidator } from '../validators/country.validator';
+import { stateNameValidator } from '../validators/state.validator';
 
 @Controller('covid')
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
+  @Version('1')
   @Get(':country/state/:name')
-  getStatisticsByState(
+  async getStatisticsByState(
     @Param('country') country: CountryEnum,
     @Param('name') name: StateEnum,
   ) {
-    return this.stateService.getStatisticsByState(country, name);
+    try {
+      const state = await stateNameValidator.validateAsync(name);
+      country = await countryNameValidator.validateAsync(country);
+      return this.stateService.getStatisticsByState(country, state);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
+  @Version('1')
   @Get(':country/state/mortality/highest')
-  stateWithHighestMortality(@Param('country') country: CountryEnum) {
-    return this.stateService.stateWithHighestMortality(country);
+  async stateWithHighestMortality(@Param('country') country: CountryEnum) {
+    try {
+      country = await countryNameValidator.validateAsync(country);
+      return this.stateService.stateWithHighestMortality(country);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
+  @Version('1')
   @Get(':country/state/mortality/lowest')
-  stateWithLowestMortality(@Param('country') country: CountryEnum) {
-    return this.stateService.stateWithLowestMortality(country);
+  async stateWithLowestMortality(@Param('country') country: CountryEnum) {
+    try {
+      country = await countryNameValidator.validateAsync(country);
+      return this.stateService.stateWithLowestMortality(country);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
+  @Version('1')
   @Get(':country/state/active-case/highest')
-  stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
-    return this.stateService.stateWithHighestActiveCases(country);
+  async stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
+    try {
+      country = await countryNameValidator.validateAsync(country);
+      return this.stateService.stateWithHighestActiveCases(country);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
+  @Version('1')
   @Get(':country/state/confirmed-case/highest')
-  stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
-    return this.stateService.stateWithHighestConfirmedCases(country);
+  async stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
+    try {
+      country = await countryNameValidator.validateAsync(country);
+      return this.stateService.stateWithHighestConfirmedCases(country);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }
