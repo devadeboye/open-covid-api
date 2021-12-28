@@ -11,5 +11,7 @@ export const countryNameValidator = Joi.string()
   .required()
   .messages({
     'any.required': `please provide a valid country name as parameter`,
+    // 'any.invalid': `country name must be one of ${Object.values(CountryEnum)}`,
+
     //TODO: add message for when value is not one of the valid values
   });

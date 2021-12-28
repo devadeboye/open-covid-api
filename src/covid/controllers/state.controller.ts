@@ -1,4 +1,10 @@
-import { BadRequestException, Controller, Get, Param } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Version,
+} from '@nestjs/common';
 import { CountryEnum } from 'src/utils/enums/country.enum';
 import { StateEnum } from 'src/utils/enums/state.enum';
 import { StateService } from '../services/state.service';
@@ -9,6 +15,7 @@ import { stateNameValidator } from '../validators/state.validator';
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
+  @Version('1')
   @Get(':country/state/:name')
   async getStatisticsByState(
     @Param('country') country: CountryEnum,
@@ -23,6 +30,7 @@ export class StateController {
     }
   }
 
+  @Version('1')
   @Get(':country/state/mortality/highest')
   async stateWithHighestMortality(@Param('country') country: CountryEnum) {
     try {
@@ -33,6 +41,7 @@ export class StateController {
     }
   }
 
+  @Version('1')
   @Get(':country/state/mortality/lowest')
   async stateWithLowestMortality(@Param('country') country: CountryEnum) {
     try {
@@ -43,6 +52,7 @@ export class StateController {
     }
   }
 
+  @Version('1')
   @Get(':country/state/active-case/highest')
   async stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
     try {
@@ -53,6 +63,7 @@ export class StateController {
     }
   }
 
+  @Version('1')
   @Get(':country/state/confirmed-case/highest')
   async stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
     try {
