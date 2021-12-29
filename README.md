@@ -17,6 +17,4 @@ different from the default one. -->
 
 ## API
 
-<!-- https://nigerian-covid-19-api.herokuapp.com/summary - to get summary of national covid19 statistics
-
-https://nigerian-covid-19-api.herokuapp.com/details - to get data for all states  -->
+check the documentation on http://localhost:3000/api/docs/#/ for the of endpoints available
