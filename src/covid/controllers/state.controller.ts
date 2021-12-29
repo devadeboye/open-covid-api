@@ -11,12 +11,11 @@ import { StateService } from '../services/state.service';
 import { countryNameValidator } from '../validators/country.validator';
 import { stateNameValidator } from '../validators/state.validator';
 
-@Controller('covid')
+@Controller({ version: '1' })
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
-  @Version('1')
-  @Get(':country/state/:name')
+  @Get('covid/:country/state/:name')
   async getStatisticsByState(
     @Param('country') country: CountryEnum,
     @Param('name') name: StateEnum,
@@ -30,8 +29,7 @@ export class StateController {
     }
   }
 
-  @Version('1')
-  @Get(':country/state/mortality/highest')
+  @Get('covid/:country/state/mortality/highest')
   async stateWithHighestMortality(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);
@@ -41,8 +39,7 @@ export class StateController {
     }
   }
 
-  @Version('1')
-  @Get(':country/state/mortality/lowest')
+  @Get('covid/:country/state/mortality/lowest')
   async stateWithLowestMortality(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);
@@ -52,8 +49,7 @@ export class StateController {
     }
   }
 
-  @Version('1')
-  @Get(':country/state/active-case/highest')
+  @Get('covid/:country/state/active-case/highest')
   async stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);
@@ -63,8 +59,7 @@ export class StateController {
     }
   }
 
-  @Version('1')
-  @Get(':country/state/confirmed-case/highest')
+  @Get('covid/:country/state/confirmed-case/highest')
   async stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);

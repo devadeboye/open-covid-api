@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CountryEnum } from 'src/utils/enums/country.enum';
@@ -13,9 +13,13 @@ export class CountryService {
   ) {}
 
   async getSummaryByCountry(name: CountryEnum) {
-    return await this.countryModel
+    const result = await this.countryModel
       .findOne({ name })
       .select(['-createdAt', '-_id']);
+    if (!result) {
+      throw new NotFoundException('Covid 19 Information for Country not found');
+    }
+    return result;
   }
 
   updateInformation(update: CountryDto) {
