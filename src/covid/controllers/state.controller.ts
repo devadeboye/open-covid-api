@@ -16,6 +16,7 @@ import {
   ApiResponse,
   ApiTags,
   ApiParam,
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { State } from '../models/state.model';
 
@@ -40,6 +41,10 @@ export class StateController {
     status: 200,
     description: 'record found for state',
     type: State,
+  })
+  @ApiBadRequestResponse({
+    description:
+      'Country or state name supplied does not exist or is not supported',
   })
   async getStatisticsByState(
     @Param('country') country: CountryEnum,
@@ -66,6 +71,9 @@ export class StateController {
     description: 'record found',
     type: State,
   })
+  @ApiBadRequestResponse({
+    description: 'Country name supplied does not exist or is not supported',
+  })
   async stateWithHighestMortality(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);
@@ -86,6 +94,9 @@ export class StateController {
     status: 200,
     description: 'record found',
     type: State,
+  })
+  @ApiBadRequestResponse({
+    description: 'Country name supplied does not exist or is not supported',
   })
   async stateWithLowestMortality(@Param('country') country: CountryEnum) {
     try {
@@ -108,6 +119,9 @@ export class StateController {
     description: 'record found',
     type: State,
   })
+  @ApiBadRequestResponse({
+    description: 'Country name supplied does not exist or is not supported',
+  })
   async stateWithHighestActiveCases(@Param('country') country: CountryEnum) {
     try {
       country = await countryNameValidator.validateAsync(country);
@@ -128,6 +142,9 @@ export class StateController {
     status: 200,
     description: 'record found',
     type: State,
+  })
+  @ApiBadRequestResponse({
+    description: 'Country name supplied does not exist or is not supported',
   })
   async stateWithHighestConfirmedCases(@Param('country') country: CountryEnum) {
     try {
