@@ -17,4 +17,4 @@ different from the default one. -->
 
 ## API
 
-check the documentation on http://localhost:3000/api/docs/#/ for the of endpoints available
+check the documentation on https://open-covid-api.herokuapp.com/api/docs/ for the list of endpoints available
