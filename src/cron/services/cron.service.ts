@@ -30,7 +30,7 @@ export class CronService {
   }
 
   // @Cron(CronExpression.EVERY_8_HOURS)
-  @Cron(CronExpression.EVERY_4_HOURS)
+  // @Cron(CronExpression.EVERY_4_HOURS)
   async updateStoredData() {
     const result = await this.getDataFromSource();
     const { states, ...nationalStatistics } = result.data;

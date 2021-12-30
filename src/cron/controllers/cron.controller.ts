@@ -9,8 +9,8 @@ export class CronController {
     private readonly stateService: StateService,
   ) {}
 
-  @Get('get-data-from-source')
-  getDataFromSource() {
-    //
-  }
+  // @Get('get-data-from-source')
+  // getDataFromSource() {
+  //   //
+  // }
 }
